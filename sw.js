@@ -1,4 +1,4 @@
-const CACHE_NAME = "snake-pwa-v2"; // NAIKKAN VERSI
+const CACHE_NAME = "snake-pwa-v3"; // NAIKKAN VERSI
 const FILES = [
   "index.html",
   "style.css",
