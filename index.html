@@ -2,23 +2,21 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Snake Nokia 3330</title>
 
-  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#306230">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <h1>🐍 Snake 3330</h1>
+
+  <!-- INI YANG SEBELUMNYA TIDAK ADA -->
   <h2>Score: <span id="score">0</span></h2>
 
   <canvas id="game" width="300" height="300"></canvas>
 
-  <p>Gunakan tombol di bawah (HP friendly)</p>
+  <p>Gunakan swipe / tombol layar</p>
 
   <div class="controls">
     <button onclick="setDir('up')">⬆️</button>
@@ -30,12 +28,10 @@
   </div>
 
   <script src="app.js"></script>
-
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js');
     }
   </script>
-
 </body>
 </html>
