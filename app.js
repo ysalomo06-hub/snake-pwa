@@ -5,11 +5,15 @@ const grid = 15;
 const tileCount = canvas.width / grid;
 const SPEED = 250;
 
-let snake = [{ x: 10, y: 10 }]; // posisi grid
+let snake = [{ x: 10, y: 10 }];
 let food = spawnFood();
 let dx = 1;
 let dy = 0;
 let score = 0;
+
+// HIGH SCORE (LOCAL)
+let highScore = localStorage.getItem("snakeHighScore") || 0;
+document.getElementById("highScore").innerText = highScore;
 
 // ===== FOOD =====
 function spawnFood() {
@@ -36,7 +40,7 @@ function gameLoop() {
     y: snake[0].y + dy
   };
 
-  // TABRAK
+  // TABRAK TEMBOK / BADAN
   if (
     head.x < 0 ||
     head.y < 0 ||
@@ -51,10 +55,17 @@ function gameLoop() {
 
   snake.unshift(head);
 
-  // MAKAN → SKOR NAIK (PASTI)
+  // MAKAN
   if (head.x === food.x && head.y === food.y) {
     score += 10;
     document.getElementById("score").innerText = score;
+
+    if (score > highScore) {
+      highScore = score;
+      localStorage.setItem("snakeHighScore", highScore);
+      document.getElementById("highScore").innerText = highScore;
+    }
+
     food = spawnFood();
   } else {
     snake.pop();
