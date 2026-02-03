@@ -2,28 +2,29 @@ const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
 const grid = 15;
-const SPEED = 250; // makin besar = makin lambat (Nokia style)
+const tileCount = canvas.width / grid;
+const SPEED = 250;
 
-let snake = [{ x: 150, y: 150 }];
+let snake = [{ x: 10, y: 10 }]; // posisi grid
 let food = spawnFood();
-let dx = grid;
+let dx = 1;
 let dy = 0;
 let score = 0;
 
-// ===== SPAWN FOOD =====
+// ===== FOOD =====
 function spawnFood() {
   return {
-    x: Math.floor(Math.random() * (canvas.width / grid)) * grid,
-    y: Math.floor(Math.random() * (canvas.height / grid)) * grid
+    x: Math.floor(Math.random() * tileCount),
+    y: Math.floor(Math.random() * tileCount)
   };
 }
 
-// ===== KONTROL =====
+// ===== CONTROL =====
 function setDir(dir) {
-  if (dir === "up" && dy === 0) { dx = 0; dy = -grid; }
-  if (dir === "down" && dy === 0) { dx = 0; dy = grid; }
-  if (dir === "left" && dx === 0) { dx = -grid; dy = 0; }
-  if (dir === "right" && dx === 0) { dx = grid; dy = 0; }
+  if (dir === "up" && dy === 0) { dx = 0; dy = -1; }
+  if (dir === "down" && dy === 0) { dx = 0; dy = 1; }
+  if (dir === "left" && dx === 0) { dx = -1; dy = 0; }
+  if (dir === "right" && dx === 0) { dx = 1; dy = 0; }
 }
 
 // ===== GAME LOOP =====
@@ -35,12 +36,12 @@ function gameLoop() {
     y: snake[0].y + dy
   };
 
-  // TABRAK TEMBOK / BADAN
+  // TABRAK
   if (
     head.x < 0 ||
     head.y < 0 ||
-    head.x >= canvas.width ||
-    head.y >= canvas.height ||
+    head.x >= tileCount ||
+    head.y >= tileCount ||
     snake.some(s => s.x === head.x && s.y === head.y)
   ) {
     alert("Game Over");
@@ -50,30 +51,30 @@ function gameLoop() {
 
   snake.unshift(head);
 
-  // MAKAN MAKANAN
+  // MAKAN → SKOR NAIK (PASTI)
   if (head.x === food.x && head.y === food.y) {
-    score += 10; // NILAI SETIAP MAKAN
+    score += 10;
     document.getElementById("score").innerText = score;
     food = spawnFood();
   } else {
     snake.pop();
   }
 
-  // GAMBAR ULAR
+  // DRAW SNAKE
   ctx.fillStyle = "#000";
-  snake.forEach(s => {
-    ctx.fillRect(s.x, s.y, grid - 1, grid - 1);
-  });
+  snake.forEach(s =>
+    ctx.fillRect(s.x * grid, s.y * grid, grid - 1, grid - 1)
+  );
 
-  // GAMBAR MAKANAN
+  // DRAW FOOD
   ctx.fillStyle = "#ff0000";
-  ctx.fillRect(food.x, food.y, grid - 1, grid - 1);
+  ctx.fillRect(food.x * grid, food.y * grid, grid - 1, grid - 1);
 }
 
 // ===== RESET =====
 function resetGame() {
-  snake = [{ x: 150, y: 150 }];
-  dx = grid;
+  snake = [{ x: 10, y: 10 }];
+  dx = 1;
   dy = 0;
   score = 0;
   document.getElementById("score").innerText = score;
