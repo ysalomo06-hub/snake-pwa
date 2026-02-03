@@ -36,16 +36,20 @@ function gameLoop() {
     snake = [{x:150,y:150}];
     dx = grid; dy = 0;
     food = spawnFood();
+    score = 0;
+    document.getElementById("score").innerText = score;
     return;
   }
 
   snake.unshift(head);
 
   if (head.x === food.x && head.y === food.y) {
-    food = spawnFood();
-  } else {
-    snake.pop();
-  }
+  score += 10; // NILAI SETIAP MAKAN
+  document.getElementById("score").innerText = score;
+  food = spawnFood();
+} else {
+  snake.pop();
+}
 
   ctx.fillStyle = "#000";
   snake.forEach(s => ctx.fillRect(s.x, s.y, grid-1, grid-1));
@@ -55,4 +59,5 @@ function gameLoop() {
 }
 
 setInterval(gameLoop, 300);
+
 
