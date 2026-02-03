@@ -54,4 +54,5 @@ function gameLoop() {
   ctx.fillRect(food.x, food.y, grid-1, grid-1);
 }
 
-setInterval(gameLoop, 120);
+setInterval(gameLoop, 300);
+
