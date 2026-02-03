@@ -9,14 +9,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <h1>🐍 Snake 3330</h1>
 
-  <!-- INI YANG SEBELUMNYA TIDAK ADA -->
   <h2>Score: <span id="score">0</span></h2>
+  <h3>High Score: <span id="highScore">0</span></h3>
 
   <canvas id="game" width="300" height="300"></canvas>
 
-  <p>Gunakan swipe / tombol layar</p>
+  <p>Gunakan tombol di bawah</p>
 
   <div class="controls">
     <button onclick="setDir('up')">⬆️</button>
@@ -33,5 +34,6 @@
       navigator.serviceWorker.register('sw.js');
     }
   </script>
+
 </body>
 </html>
