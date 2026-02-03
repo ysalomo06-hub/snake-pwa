@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snake Nokia 3330</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🐍 Snake 3330</h1>
+  <canvas id="game" width="300" height="300"></canvas>
+
+  <p>Gunakan swipe / tombol layar</p>
+
+  <div class="controls">
+    <button onclick="setDir('up')">⬆️</button>
+    <div>
+      <button onclick="setDir('left')">⬅️</button>
+      <button onclick="setDir('right')">➡️</button>
+    </div>
+    <button onclick="setDir('down')">⬇️</button>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>
